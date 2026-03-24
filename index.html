@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pasaporte Peruano | דרכון פרואני</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #D62B2B;
+    --dark: #1A1A2E;
+    --gold: #F4A722;
+    --light: #F8F5F0;
+    --white: #FFFFFF;
+    --green: #16A34A;
+    --green-light: #DCFCE7;
+    --red-light: #FEE2E2;
+    --yellow-light: #FEF9C3;
+    --gray: #6B7280;
+    --gray-light: #F3F4F6;
+    --border: #E5E7EB;
+  }
+
+  body {
+    font-family: 'Inter', 'Heebo', sans-serif;
+    background: #D1D5DB;
+  }
+
+  .he {
+    font-family: 'Heebo', sans-serif;
+    direction: rtl;
+  }
+
+  /* ===== A4 PAGE ===== */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+    page-break-after: always;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; }
+  }
+
+  /* ===== SHARED HEADER ===== */
+  .page-header {
+    padding: 28px 44px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+  .page-num {
+    width: 40px; height: 40px;
+    background: var(--dark);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800;
+    flex-shrink: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .page-titles { flex: 1; }
+  .page-title-es {
+    font-size: 26px; font-weight: 800;
+    color: var(--dark); line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+  .page-title-he {
+    font-size: 14px; font-weight: 400;
+    color: var(--gray);
+    font-family: 'Heebo', sans-serif;
+    direction: rtl; text-align: right;
+    margin-top: 3px;
+  }
+  .page-emoji { font-size: 36px; }
+  .page-content { flex: 1; padding: 30px 44px; }
+  .page-footer-bar { height: 7px; background: linear-gradient(90deg, var(--red), var(--gold)); }
+
+  /* ========================================
+     PAGE 1 — COVER
+  ======================================== */
+  .cover { background: var(--dark); color: white; }
+  .cover-top-bar { height: 10px; background: linear-gradient(90deg, var(--red) 50%, var(--gold) 50%); }
+  .cover-body {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 50px 44px; gap: 26px; text-align: center;
+  }
+  .cover-flag { font-size: 64px; line-height: 1; }
+  .cover-es-title {
+    font-size: 52px; font-weight: 900; line-height: 1.05;
+    letter-spacing: -2px;
+  }
+  .cover-es-sub {
+    font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.5);
+    letter-spacing: 4px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+  .cover-he-title {
+    font-size: 20px; font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Heebo', sans-serif;
+    direction: rtl;
+  }
+  .cover-divider { width: 60px; height: 3px; background: var(--gold); }
+  .cover-date-box {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 18px 32px;
+    font-size: 22px; font-weight: 700;
+    color: white;
+  }
+  .cover-date-box .small {
+    font-size: 13px; font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    display: block; margin-bottom: 4px;
+    font-family: 'Heebo', sans-serif; direction: rtl;
+  }
+  .pages-index {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    margin-top: 10px;
+  }
+  .idx-chip {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    padding: 9px 16px;
+    font-size: 13px; color: rgba(255,255,255,0.7);
+    font-family: 'Inter', sans-serif;
+  }
+  .idx-chip .n {
+    background: var(--gold); color: var(--dark);
+    width: 18px; height: 18px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800; margin-right: 6px;
+  }
+  .cover-footer {
+    padding: 18px 44px;
+    background: rgba(255,255,255,0.04);
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: rgba(255,255,255,0.3);
+    font-family: 'Inter', sans-serif;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* ========================================
+     PAGE 2 — DOCUMENTOS
+  ======================================== */
+  .doc-list { display: flex; flex-direction: column; gap: 14px; }
+  .doc-item {
+    display: flex; align-items: flex-start; gap: 18px;
+    background: var(--gray-light);
+    border: 1.5px solid var(--border);
+    border-radius: 16px; padding: 18px 22px;
+  }
+  .doc-item.must { background: #F0FFF4; border-color: #86EFAC; }
+  .doc-icon { font-size: 34px; flex-shrink: 0; margin-top: 1px; }
+  .doc-body { flex: 1; }
+  .doc-es {
+    font-size: 18px; font-weight: 700; color: var(--dark); line-height: 1.25;
+  }
+  .doc-he {
+    font-size: 13px; color: var(--gray);
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    margin-top: 4px; line-height: 1.5;
+    text-align: right;
+  }
+  .doc-note {
+    font-size: 13px; color: #555; margin-top: 6px; line-height: 1.5;
+  }
+  .badge {
+    display: inline-block; padding: 3px 11px; border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+    font-family: 'Inter', sans-serif; margin-top: 6px;
+  }
+  .badge-green { background: var(--green); color: white; }
+  .badge-gold  { background: var(--gold); color: var(--dark); }
+  .badge-red   { background: var(--red); color: white; }
+
+  .warn-box {
+    background: #FEF9C3; border: 1.5px solid #FDE047;
+    border-radius: 14px; padding: 18px 22px; margin-top: 18px;
+  }
+  .warn-title { font-size: 15px; font-weight: 700; color: #854D0E; margin-bottom: 5px; }
+  .warn-es { font-size: 14px; color: #713F12; line-height: 1.6; }
+  .warn-he {
+    font-size: 12px; color: #92400E; opacity: 0.65;
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    margin-top: 6px; text-align: right;
+  }
+
+  /* ========================================
+     PAGE 3 — FOTOGRAFÍA
+  ======================================== */
+  .foto-top-note {
+    background: var(--dark); color: white;
+    border-radius: 16px; padding: 20px 28px;
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 26px;
+  }
+  .foto-top-note .big-emoji { font-size: 40px; }
+  .foto-top-note .msg-es { font-size: 20px; font-weight: 700; }
+  .foto-top-note .msg-he {
+    font-size: 14px; color: rgba(255,255,255,0.45);
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    text-align: right; margin-top: 3px;
+  }
+  .foto-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .foto-rule {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 18px; border-radius: 14px;
+    border: 1.5px solid var(--border);
+  }
+  .foto-rule.yes { background: #F0FFF4; border-color: #86EFAC; }
+  .foto-rule.no  { background: #FFF1F2; border-color: #FECDD3; }
+  .foto-rule-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .foto-rule-es { font-size: 15px; font-weight: 700; color: var(--dark); line-height: 1.3; }
+  .foto-rule-he {
+    font-size: 12px; color: var(--gray);
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    text-align: right; margin-top: 3px;
+  }
+  .bebe-note {
+    background: #F0F9FF; border: 1.5px solid #BAE6FD;
+    border-radius: 14px; padding: 18px 22px; margin-top: 18px;
+  }
+  .bebe-note-es { font-size: 15px; font-weight: 700; color: #0C4A6E; }
+  .bebe-note-body { font-size: 14px; color: #075985; line-height: 1.6; margin-top: 5px; }
+  .bebe-note-he {
+    font-size: 12px; color: #0369A1; opacity: 0.65;
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    margin-top: 6px; text-align: right;
+  }
+
+  /* ========================================
+     PAGE 4 — DÓNDE IR (NEW)
+  ======================================== */
+  .location-hero {
+    background: var(--dark); border-radius: 18px;
+    padding: 28px; color: white; margin-bottom: 22px;
+    text-align: center;
+  }
+  .location-hero .loc-es { font-size: 22px; font-weight: 800; margin-top: 10px; }
+  .location-hero .loc-sub { font-size: 15px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+  .location-hero .loc-he {
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    font-size: 14px; color: rgba(255,255,255,0.35); margin-top: 4px;
+  }
+  .location-hero .loc-addr {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 12px 20px;
+    font-size: 15px; color: rgba(255,255,255,0.85);
+    font-family: 'Inter', sans-serif; margin-top: 14px;
+    display: inline-block;
+  }
+
+  .steps-list { display: flex; flex-direction: column; gap: 14px; }
+  .step-item {
+    display: flex; align-items: flex-start; gap: 18px;
+    background: var(--gray-light); border: 1.5px solid var(--border);
+    border-radius: 14px; padding: 16px 20px;
+  }
+  .step-item.highlight { background: #FEF9C3; border-color: #FDE047; }
+  .step-num-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--dark); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; flex-shrink: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .step-num-circle.gold { background: var(--gold); color: var(--dark); }
+  .step-body { flex: 1; }
+  .step-es { font-size: 17px; font-weight: 700; color: var(--dark); line-height: 1.3; }
+  .step-detail { font-size: 14px; color: #555; line-height: 1.6; margin-top: 4px; }
+  .step-he {
+    font-size: 12px; color: var(--gray);
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    text-align: right; margin-top: 4px;
+  }
+  .map-note {
+    background: #F0FFF4; border: 1.5px solid #86EFAC;
+    border-radius: 14px; padding: 16px 20px; margin-top: 18px;
+  }
+  .map-note-es { font-size: 14px; font-weight: 700; color: #14532D; }
+  .map-note-body { font-size: 13px; color: #166534; line-height: 1.6; margin-top: 4px; }
+  .map-note-he {
+    font-size: 12px; color: #15803D; opacity: 0.65;
+    font-family: 'Heebo', sans-serif; direction: rtl;
+    text-align: right; margin-top: 5px;
+  }
+
+  /* ========================================
+     PAGE 5 — HORARIOS
+  ======================================== */
+  .time-hero {
+    background: var(--dark); border-radius: 18px;
+    padding: 32px; color: white; margin-bottom: 24px; text-align: center;
+  }
+  .time-label { font-size: 12px; letter-spacing: 3px; color: rgba(255,255,255,0.35); text-transform: uppercase; }
+  .time-striked { font-size: 18px; color: rgba(255,255,255,0.3); text-decoration: line-through; font-family: 'Inter'; margin-top: 4px; }
+  .time-big { font-size: 72px; font-weight: 900; letter-spacing: -3px; font-family: 'Inter'; line-height: 1; }
+  .time-gold-badge {
+    background: var(--gold); color: var(--dark);
+    padding: 10px 28px; border-radius: 30px;
+    font-size: 18px; font-weight: 800;
+    display: inline-block; margin-top: 14px;
+  }
+  .time-gold-badge .he-sub {
+    font-family: 'Heebo', sans-serif; font-size: 13px;
+    color: rgba(0,0,0,0.45); font-weight: 400;
+    display: block; margin-top: 1px;
+  }
+  .time-explain { font-size: 15px; color: rgba(255,255,255,0.55); margin-top: 12px; line-height: 1.7; }
+
+  .timeline { display: flex; flex-direction: column; }
+  .tl-row {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 14px 0; position: relative;
+  }
+  .tl-row:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 17px; top: 52px;
+    width: 2px; height: calc(100% - 38px);
+    background: var(--border);
+  }
+  .tl-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--dark); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700; flex-shrink: 0;
+    position: relative; z-index: 1; font-family: 'Inter';
+  }
+  .tl-dot.gold { background: var(--gold); color: var(--dark); }
+  .tl-dot.green { background: var(--green); }
+  .tl-body { flex: 1; padding-top: 4px; }
+  .tl-time { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--gray); text-transform: uppercase; }
+  .tl-es { font-size: 17px; font-weight: 700; color: var(--dark); margin-top: 3px; }
+  .tl-he { font-size: 12px; color: var(--gray); font-family: 'Heebo'; direction: rtl; text-align: right; margin-top: 3px; }
+  .tl-detail { font-size: 13px; color: #555; margin-top: 4px; line-height: 1.5; }
+
+  /* ========================================
+     PAGE 6 — CONSEJOS
+  ======================================== */
+  .tips-list { display: flex; flex-direction: column; gap: 18px; }
+  .tip {
+    background: var(--gray-light); border: 1.5px solid var(--border);
+    border-radius: 18px; padding: 22px 24px;
+  }
+  .tip.dark { background: var(--dark); border-color: var(--dark); color: white; }
+  .tip.warn { background: #FFF1F2; border-color: #FECDD3; }
+  .tip-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 10px; }
+  .tip-emoji { font-size: 36px; flex-shrink: 0; }
+  .tip-title-es { font-size: 20px; font-weight: 800; line-height: 1.2; }
+  .tip-title-he {
+    font-size: 13px; font-family: 'Heebo'; direction: rtl; text-align: right;
+    color: var(--gray); margin-top: 3px;
+  }
+  .tip.dark .tip-title-he { color: rgba(255,255,255,0.4); }
+  .tip-body-es { font-size: 15px; color: #374151; line-height: 1.7; }
+  .tip.dark .tip-body-es { color: rgba(255,255,255,0.75); }
+  .tip.warn .tip-body-es { color: #9F1239; }
+  .tip-body-he {
+    font-size: 13px; font-family: 'Heebo'; direction: rtl; text-align: right;
+    color: var(--gray); margin-top: 8px; line-height: 1.6;
+    border-top: 1px solid var(--border); padding-top: 8px;
+  }
+  .tip.dark .tip-body-he { color: rgba(255,255,255,0.3); border-top-color: rgba(255,255,255,0.1); }
+  .tip.warn .tip-body-he { color: #BE123C; border-top-color: #FECDD3; }
+  .steps-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .chip {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+    color: white; padding: 10px 16px; border-radius: 12px;
+    font-size: 14px; font-weight: 600; flex: 1; min-width: 110px; text-align: center;
+  }
+  .chip .cn { font-size: 20px; display: block; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ======================== PAGE 1 — COVER ======================== -->
+<div class="page cover">
+  <div class="cover-top-bar"></div>
+  <div class="cover-body">
+    <div class="cover-flag">🇵🇪</div>
+    <div>
+      <div class="cover-es-title">Guía del<br>Pasaporte</div>
+      <div class="cover-es-sub" style="margin-top:8px;">PASAPORTE ELECTRÓNICO PERUANO</div>
+      <div class="cover-he-title" style="margin-top:6px;">מדריך הדרכון הפרואני</div>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-date-box">
+      <span class="small">תאריך התור | Fecha de cita</span>
+      Jueves 26 de Marzo, 2026 &nbsp;·&nbsp; 10:00 am
+      <div style="font-size:15px;font-weight:400;color:rgba(255,255,255,0.5);margin-top:4px;">Jockey Plaza · Santiago de Surco · Lima</div>
+    </div>
+    <div class="pages-index">
+      <div class="idx-chip"><span class="n">1</span>Portada</div>
+      <div class="idx-chip"><span class="n">2</span>Documentos</div>
+      <div class="idx-chip"><span class="n">3</span>Fotografía</div>
+      <div class="idx-chip"><span class="n">4</span>Dónde ir</div>
+      <div class="idx-chip"><span class="n">5</span>Horarios</div>
+      <div class="idx-chip"><span class="n">6</span>Consejos</div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <span>Superintendencia Nacional de Migraciones</span>
+    <span>Lima, Perú</span>
+    <span>26.03.2026</span>
+  </div>
+</div>
+
+
+<!-- ======================== PAGE 2 — DOCUMENTOS ======================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">2</div>
+    <div class="page-titles">
+      <div class="page-title-es">Documentos Requeridos</div>
+      <div class="page-title-he">מה להביא ביום התור</div>
+    </div>
+    <div class="page-emoji">📋</div>
+  </div>
+  <div class="page-content">
+    <div class="doc-list">
+
+      <div class="doc-item must">
+        <div class="doc-icon">📄</div>
+        <div class="doc-body">
+          <div class="doc-es">Constancia de cita electrónica</div>
+          <div class="doc-he">האישור הזה — מודפס או פתוח בנייד</div>
+          <div class="doc-note">Impresa o visible en pantalla del celular al ingresar.</div>
+        </div>
+        <div><div class="badge badge-green">OBLIGATORIO</div></div>
+      </div>
+
+      <div class="doc-item must">
+        <div class="doc-icon">🧾</div>
+        <div class="doc-body">
+          <div class="doc-es">Recibo de pago — Banco de la Nación</div>
+          <div class="doc-he">קבלת תשלום מ-Págalo.pe / בנק לאומי</div>
+          <div class="doc-note">Pagado el 05/03/2026 vía Págalo.pe · S/ 120.90 · Ticket N° 260002791126</div>
+        </div>
+        <div><div class="badge badge-green">OBLIGATORIO</div></div>
+      </div>
+
+      <div class="doc-item must">
+        <div class="doc-icon">🪪</div>
+        <div class="doc-body">
+          <div class="doc-es">DNI vigente del menor (original)</div>
+          <div class="doc-he">DNI של הילד/ה — התעודה הצהובה המקורית</div>
+          <div class="doc-note">DNI N° 94517048 · No fotocopia.</div>
+        </div>
+        <div><div class="badge badge-green">OBLIGATORIO</div></div>
+      </div>
+
+      <div class="doc-item must">
+        <div class="doc-icon">🪪</div>
+        <div class="doc-body">
+          <div class="doc-es">DNI del padre, madre o apoderado</div>
+          <div class="doc-he">תעודת הזהות שלך — ההורה שמגיע</div>
+          <div class="doc-note">El padre/madre debe estar presente físicamente.</div>
+        </div>
+        <div><div class="badge badge-green">OBLIGATORIO</div></div>
+      </div>
+
+      <div class="doc-item must">
+        <div class="doc-icon">👶</div>
+        <div class="doc-body">
+          <div class="doc-es">El menor en persona — presencia física obligatoria</div>
+          <div class="doc-he">הילד/ה חייב/ת להיות שם — הצילום מתבצע במקום</div>
+          <div class="doc-note">La fotografía y datos biométricos se toman en el local.</div>
+        </div>
+        <div><div class="badge badge-green">OBLIGATORIO</div></div>
+      </div>
+
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-title">⚠️ Si el menor no tiene DNI todavía</div>
+      <div class="warn-es">Presentar copia certificada del acta de nacimiento, emitida hace no más de 3 meses.</div>
+      <div class="warn-he">אם אין DNI — יש להביא העתק נוטריוני של תעודת הלידה, שהוצאה לא יותר מ-3 חודשים אחורה</div>
+    </div>
+  </div>
+  <div class="page-footer-bar"></div>
+</div>
+
+
+<!-- ======================== PAGE 3 — FOTOGRAFÍA ======================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">3</div>
+    <div class="page-titles">
+      <div class="page-title-es">Requisitos para la Fotografía</div>
+      <div class="page-title-he">הנחיות לתמונה</div>
+    </div>
+    <div class="page-emoji">📸</div>
+  </div>
+  <div class="page-content">
+
+    <div class="foto-top-note">
+      <div class="big-emoji">🎉</div>
+      <div>
+        <div class="msg-es">No traer fotos de casa — la foto se toma en el local</div>
+        <div class="msg-he">לא צריך להביא תמונות — הצילום מתבצע במקום על ידי הצוות</div>
+      </div>
+    </div>
+
+    <div class="foto-grid">
+      <div class="foto-rule yes">
+        <div class="foto-rule-icon">✅</div>
+        <div>
+          <div class="foto-rule-es">Ropa de color oscuro</div>
+          <div class="foto-rule-he">בגדים כהים — שחור, כחול, אפור</div>
+        </div>
+      </div>
+      <div class="foto-rule yes">
+        <div class="foto-rule-icon">✅</div>
+        <div>
+          <div class="foto-rule-es">Orejas visibles</div>
+          <div class="foto-rule-he">אוזניים גלויות לחלוטין</div>
+        </div>
+      </div>
+      <div class="foto-rule yes">
+        <div class="foto-rule-icon">✅</div>
+        <div>
+          <div class="foto-rule-es">Rostro despejado y limpio</div>
+          <div class="foto-rule-he">פנים פנויות ונקיות</div>
+        </div>
+      </div>
+      <div class="foto-rule yes">
+        <div class="foto-rule-icon">✅</div>
+        <div>
+          <div class="foto-rule-es">Maquillaje discreto (si aplica)</div>
+          <div class="foto-rule-he">איפור עדין בלבד</div>
+        </div>
+      </div>
+      <div class="foto-rule no">
+        <div class="foto-rule-icon">❌</div>
+        <div>
+          <div class="foto-rule-es">No colores claros ni llamativos</div>
+          <div class="foto-rule-he">לא לבוש בהיר / צעקני / פסים</div>
+        </div>
+      </div>
+      <div class="foto-rule no">
+        <div class="foto-rule-icon">❌</div>
+        <div>
+          <div class="foto-rule-es">Sin accesorios recargados</div>
+          <div class="foto-rule-he">לא תכשיטים, כובע, או אביזרים</div>
+        </div>
+      </div>
+      <div class="foto-rule no">
+        <div class="foto-rule-icon">❌</div>
+        <div>
+          <div class="foto-rule-es">Sin lentes de ningún tipo</div>
+          <div class="foto-rule-he">לא משקפיים — לא שמש, לא ראייה</div>
+        </div>
+      </div>
+      <div class="foto-rule no">
+        <div class="foto-rule-icon">❌</div>
+        <div>
+          <div class="foto-rule-es">Sin cambio sustancial vs. DNI</div>
+          <div class="foto-rule-he">לא שינוי מראה מהותי לעומת ה-DNI</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bebe-note">
+      <div class="bebe-note-es">👶 Importante para bebés</div>
+      <div class="bebe-note-body">
+        Los mismos requisitos aplican para bebés: orejas visibles, rostro despejado, sin gorro ni accesorios. Preparar al bebé antes de llegar — el personal necesita tomar la foto rápidamente.
+      </div>
+      <div class="bebe-note-he">גם לתינוקת — אוזניים גלויות, פנים פנויות, ללא כובע. לצלם תוך שניות — להכין מראש</div>
+    </div>
+  </div>
+  <div class="page-footer-bar"></div>
+</div>
+
+
+<!-- ======================== PAGE 4 — DÓNDE IR ======================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">4</div>
+    <div class="page-titles">
+      <div class="page-title-es">¿Dónde ir en Jockey Plaza?</div>
+      <div class="page-title-he">איפה בדיוק בג'וקי פלזה</div>
+    </div>
+    <div class="page-emoji">📍</div>
+  </div>
+  <div class="page-content">
+
+    <div class="location-hero">
+      <div style="font-size:48px;">🏬</div>
+      <div class="loc-es">Agencia Migraciones — Jockey Plaza</div>
+      <div class="loc-sub">2° Piso del centro comercial</div>
+      <div class="loc-he">קומה 2 של הקניון</div>
+      <div class="loc-addr">📌 Av. Javier Prado Este N° 4200, Santiago de Surco, Lima</div>
+    </div>
+
+    <div class="steps-list">
+
+      <div class="step-item highlight">
+        <div class="step-num-circle gold">🚗</div>
+        <div class="step-body">
+          <div class="step-es">Ingresar al estacionamiento del Jockey Plaza</div>
+          <div class="step-detail">Hay estacionamiento amplio. Llegar a las 09:30–09:40 para encontrar lugar sin apuro.</div>
+          <div class="step-he">כניסה לחניון הקניון — להגיע ב-09:30 לפחות</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num-circle">1</div>
+        <div class="step-body">
+          <div class="step-es">Entrar al mall y subir al 2° piso</div>
+          <div class="step-detail">Buscar la señalización de Migraciones o preguntar en informaciones del mall.</div>
+          <div class="step-he">להיכנס לקניון ולעלות לקומה 2</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num-circle">2</div>
+        <div class="step-body">
+          <div class="step-es">Buscar el letrero de "Migraciones"</div>
+          <div class="step-detail">La agencia tiene carteles visibles. Cuenta con 19 módulos de atención — es una oficina grande.</div>
+          <div class="step-he">לחפש את השלט של Migraciones — משרד גדול עם 19 דלפקים</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num-circle">3</div>
+        <div class="step-body">
+          <div class="step-es">Presentarse en el ingreso con la constancia</div>
+          <div class="step-detail">Mostrar la constancia de cita al guardia o recepcionista antes de ingresar.</div>
+          <div class="step-he">להציג את אישור התור בכניסה לפקיד</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="map-note">
+      <div class="map-note-es">🔍 Tip: Cómo encontrarlo fácil</div>
+      <div class="map-note-body">
+        Antes de salir, buscar en Google Maps "Migraciones Jockey Plaza" — aparece marcado dentro del mall con la entrada exacta. También puedes preguntar a los empleados del mall al ingresar.
+      </div>
+      <div class="map-note-he">לפני היציאה — לפתוח Google Maps ולחפש "Migraciones Jockey Plaza" — מסומן בתוך הקניון</div>
+    </div>
+
+  </div>
+  <div class="page-footer-bar"></div>
+</div>
+
+
+<!-- ======================== PAGE 5 — HORARIOS Y TIEMPOS ======================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">5</div>
+    <div class="page-titles">
+      <div class="page-title-es">Hora de Llegada y Tiempos</div>
+      <div class="page-title-he">שעת הגעה וזמנים</div>
+    </div>
+    <div class="page-emoji">⏱️</div>
+  </div>
+  <div class="page-content">
+
+    <div class="time-hero">
+      <div class="time-label">Ventana de cita asignada | חלון התור</div>
+      <div class="time-striked">10:00 – 10:59</div>
+      <div class="time-big">09:45</div>
+      <div class="time-gold-badge">
+        Llegar a las 09:45
+        <span class="he-sub">להגיע ב-09:45</span>
+      </div>
+      <div class="time-explain">
+        La hora asignada es una <strong>ventana de 1 hora</strong>, no una hora exacta.<br>
+        Llegar 15 min antes evita estrés y facilita la prioridad de bebé.
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-row">
+        <div class="tl-dot gold">🚗</div>
+        <div class="tl-body">
+          <div class="tl-time">09:30 – 09:45</div>
+          <div class="tl-es">Estacionamiento y entrada al mall</div>
+          <div class="tl-he">חניה וכניסה לקניון</div>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-dot">1</div>
+        <div class="tl-body">
+          <div class="tl-time">09:45 – 10:00</div>
+          <div class="tl-es">Subir al 2° piso · Presentar constancia · Solicitar prioridad bebé</div>
+          <div class="tl-detail">Mencionar al guardia que vienes con un bebé → atención preferencial.</div>
+          <div class="tl-he">קומה 2 · הצגת אישור · לבקש עדיפות לתינוקת</div>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-dot">2</div>
+        <div class="tl-body">
+          <div class="tl-time">10:00 – 10:20</div>
+          <div class="tl-es">Verificación de documentos en módulo</div>
+          <div class="tl-he">בדיקת מסמכים בדלפק</div>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-dot">3</div>
+        <div class="tl-body">
+          <div class="tl-time">10:20 – 10:40</div>
+          <div class="tl-es">Fotografía y captura biométrica del menor</div>
+          <div class="tl-he">צילום ותיעוד ביומטרי של הילד/ה</div>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-dot" style="background:#7C3AED;">⏳</div>
+        <div class="tl-body">
+          <div class="tl-time">~2 horas de espera</div>
+          <div class="tl-es">Esperar en el mall o volver a recoger el pasaporte</div>
+          <div class="tl-detail">
+            Tras el trámite, el pasaporte se emite en aproximadamente <strong>2 horas</strong>.<br>
+            Puedes quedarte en el mall (food court, tiendas) o salir y volver.
+          </div>
+          <div class="tl-he">~2 שעות המתנה — אפשר להישאר בקניון או לחזור לאסוף</div>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-dot green">✓</div>
+        <div class="tl-body">
+          <div class="tl-time">~12:30 – 13:00 (estimado)</div>
+          <div class="tl-es">¡Pasaporte listo para recoger! — mismo día</div>
+          <div class="tl-he">הדרכון מוכן לאיסוף! — אותו יום, כ-12:30–13:00 בהערכה</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="page-footer-bar"></div>
+</div>
+
+
+<!-- ======================== PAGE 6 — CONSEJOS ======================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">6</div>
+    <div class="page-titles">
+      <div class="page-title-es">Consejos Importantes</div>
+      <div class="page-title-he">טיפים חשובים</div>
+    </div>
+    <div class="page-emoji">💡</div>
+  </div>
+  <div class="page-content">
+    <div class="tips-list">
+
+      <div class="tip dark">
+        <div class="tip-top">
+          <div class="tip-emoji">👶</div>
+          <div>
+            <div class="tip-title-es">¡Bebé = prioridad en la cola!</div>
+            <div class="tip-title-he">תינוקת = עדיפות בתור</div>
+          </div>
+        </div>
+        <div class="tip-body-es">
+          Al llegar, decirle al guardia o recepcionista: <em>"Vengo con un bebé"</em>. Migraciones otorga atención preferencial a bebés y embarazadas. Normalmente se adelanta gran parte de la espera.
+        </div>
+        <div class="tip-body-he">בכניסה לומר לשומר: "Vengo con un bebé" — בדרך כלל עוקפים חלק ניכר מהתור</div>
+        <div class="steps-chips">
+          <div class="chip"><span class="cn">1</span>Entrar</div>
+          <div class="chip"><span class="cn">2</span>Decir al guardia</div>
+          <div class="chip"><span class="cn">3</span>"Tengo bebé"</div>
+          <div class="chip"><span class="cn">4</span>Prioridad ✓</div>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-top">
+          <div class="tip-emoji">📱</div>
+          <div>
+            <div class="tip-title-es">Tener la constancia accesible</div>
+            <div class="tip-title-he">לוודא שהאישור פתוח ונגיש</div>
+          </div>
+        </div>
+        <div class="tip-body-es">
+          Abrir el PDF antes de salir de casa y verificar que el celular tenga batería. Recomendable imprimir una copia de respaldo.
+        </div>
+        <div class="tip-body-he">לפתוח את ה-PDF לפני היציאה ולוודא שהסוללה טעונה. עדיף גם להדפיס גיבוי</div>
+      </div>
+
+      <div class="tip warn">
+        <div class="tip-top">
+          <div class="tip-emoji">🚫</div>
+          <div>
+            <div class="tip-title-es">No permitir copias del recibo de pago</div>
+            <div class="tip-title-he">לא לאפשר צילום של הקבלה</div>
+          </div>
+        </div>
+        <div class="tip-body-es">
+          No dejes que terceras personas fotografíen o copien el recibo del Banco de la Nación. Es una advertencia oficial de Migraciones.
+        </div>
+        <div class="tip-body-he">אזהרה רשמית של Migraciones — אין לאפשר לאחרים לצלם את קבלת הבנק</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-footer-bar"></div>
+</div>
+
+</body>
+</html>
